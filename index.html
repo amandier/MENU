@@ -465,33 +465,62 @@ const desserts = [
   { type: "food", name: "FRUIT SALAD", description: "exotic fruits with tapioca pearls mango sorbet and homemade coconut liqueur", price: "10.50" }
 ];
 
+drinks:
 const drinks = [
-  { type: "separator", description: "WATER & SODA" },
-  { type: "drink", name: "SPARKLING WATER", description: "5dl", price: "4.50" },
-  { type: "drink", name: "STILL WATER", description: "5dl", price: "4.50" },
-  { type: "drink", name: "SODA", description: "3dl", price: "5.50" },
-  { type: "drink", name: "TAP WATER", description: "", price: "FREE" },
-  { type: "separator", description: "BEER" },
-  { type: "drink", name: "BADENER GOLD", description: "3dl", price: "4.80" },
-  { type: "drink", name: "BADENER GOLD", description: "5dl", price: "7.00" },
-  { type: "drink", name: "QUÖLLFRISCH", description: "5dl", price: "7.50" },
-  { type: "drink", name: "BIER PAUL 02", description: "3.3dl", price: "6.00" },
-  { type: "separator", description: "RED WINE" },
-  { type: "drink", name: "MERLOT DEL TICINO", description: "1dl", price: "7.00" },
-  { type: "drink", name: "BOLGHERI ROSSO", description: "1dl", price: "8.50" },
-  { type: "drink", name: "NERO D’AVOLA IGT", description: "1dl", price: "7.50" },
-  { type: "drink", name: "MONTE CASTANHEIRO", description: "1dl", price: "8.00" },
-  { type: "separator", description: "WHITE WINE & CHAMPAGNE" },
-  { type: "drink", name: "ST. SAPHORIN7", description: "1dl", price: "7.00" },
-  { type: "drink", name: "BASILICATA BIANCO", description: "1dl", price: "7.50" },
-  { type: "drink", name: "TAITTINGER BRUT", description: "7.5dl", price: "91.00" },
-  { type: "separator", description: "WHISKY" },
-  { type: "drink", name: "OBAN 14 YEARS", description: "4cl", price: "13.50" },
-  { type: "drink", name: "LAGAVULIN 16 YEARS", description: "4cl", price: "15.00" },
-  { type: "drink", name: "MACALLEN AMBER", description: "4cl", price: "16.00" },
-  { type: "separator", description: "HOT DRINKS" },
-  // Tu peux compléter ici les boissons chaudes si tu veux
+  { type: "separator", description: "BOISSONS FRAÎCHES" },
+  { type: "drink", name: "Coca Cola / Zero / Light", description: "20cl", price: "3.10" },
+  { type: "drink", name: "Schweppes / Orangina", description: "20cl", price: "3.10" },
+  { type: "drink", name: "Jus (Abricot, Ananas, Orange, Tomate)", description: "", price: "3.10" },
+  { type: "drink", name: "Eau (50cl)", description: "", price: "3.10" },
+  { type: "drink", name: "Eau (1L)", description: "", price: "4.20" },
+  { type: "drink", name: "Badoit", description: "", price: "4.00" },
+
+  { type: "separator", description: "BIÈRES" },
+  { type: "drink", name: "Leffe", description: "", price: "5.50" },
+  { type: "drink", name: "Corona", description: "", price: "5.00" },
+  { type: "drink", name: "Heineken", description: "", price: "5.00" },
+  { type: "drink", name: "1664", description: "", price: "5.00" },
+
+  { type: "separator", description: "VINS (AU VERRE 15cl)" },
+  { type: "drink", name: "La verre 15cl Blanc/Rosé/Rouge", description: "", price: "5.00" },
+  { type: "drink", name: "La carafe 25cl Blanc/Rosé/Rouge", description: "", price: "7.00" },
+  { type: "drink", name: "La carafe 50cl Blanc/Rosé/Rouge", description: "", price: "12.00" },
+
+  { type: "separator", description: "VINS (BOUTEILLES)" },
+  { type: "drink", name: "Château Bonnet Entre Deux Mers", description: "75cl", price: "23.90" },
+  { type: "drink", name: "Château Bonnet Merlot", description: "75cl", price: "23.90" },
+  { type: "drink", name: "Sancerre Blanc AOC", description: "75cl", price: "29.90" },
+  { type: "drink", name: "Sancerre Rouge AOC", description: "75cl", price: "29.90" },
+  { type: "drink", name: "Chorey-lès-Beaune AOC", description: "", price: "29.90" },
+  { type: "drink", name: "Côtes de Provence", description: "Rosé 2016", price: "28.00" },
+  { type: "drink", name: "Domaine de la Merquière", description: "Saint-Pons AOP 75cl", price: "29.00" },
+  { type: "drink", name: "Côtes du Rhône", description: "Vin rouge AOC 75cl", price: "29.00" },
+
+  { type: "separator", description: "CHAMPAGNE" },
+  { type: "drink", name: "La coupe de champagne", description: "", price: "8.00" },
+  { type: "drink", name: "La bouteille de champagne", description: "", price: "54.00" },
+
+  { type: "separator", description: "DIGESTIFS" },
+  { type: "drink", name: "Armagnac / Cognac / Calvados / Get27 / Get31 / Marie Brizard", description: "", price: "7.50" },
+  { type: "drink", name: "Baileys / Rhum / Mirabelle / Poire / Gin / Vodka", description: "", price: "7.50" },
+
+  { type: "separator", description: "APÉRITIFS" },
+  { type: "drink", name: "Apéritifs à", description: "12,5cl", price: "3.90" },
+  { type: "drink", name: "Kir classique", description: "12,5cl", price: "3.90" },
+  { type: "drink", name: "Martini Rosso / Bianco", description: "8cl", price: "4.50" },
+  { type: "drink", name: "Porto / Suze", description: "5cl", price: "4.50" },
+  { type: "drink", name: "Ricard", description: "2cl", price: "4.50" },
+  { type: "drink", name: "Whisky", description: "4cl", price: "4.50" },
+  { type: "drink", name: "Bourbon", description: "4cl", price: "4.50" },
+  { type: "drink", name: "Kir Royal", description: "12,5cl", price: "7.50" },
+  { type: "drink", name: "Apéritifs à", description: "", price: "7.50" },
+  { type: "drink", name: "Jack Daniel's / Chivas / Glenfiddich", description: "4cl", price: "7.50" },
+
+  { type: "separator", description: "BOISSONS CHAUDES" },
+  { type: "drink", name: "Café Espresso", description: "", price: "2.50" },
+  { type: "drink", name: "Café Crème / Chocolat / Thé / Infusion", description: "", price: "3.50" },
 ];
+
 
 
 /////////////////////////////////////////////////////////////////
