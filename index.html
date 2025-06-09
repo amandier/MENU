@@ -1,622 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Restaurant</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rubik:wght@300;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fffdf2;
+      --radius: 10px;
+      --icolor1: #c4e85a;
+      --icolor2: #ffb370;
+      --icolor3: #d65ae8;
+      --icolor4: #63c8ff;
+    }
+    body {
+      font-family: "Rubik", sans-serif;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 5% auto 5%;
+      grid-template-rows: 140px 80px auto 100px 30px;
+      background: var(--bg);
+    }
+    .header {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      font-family: "Dancing Script", cursive;
+      position: relative;
+      z-index: 1;
+    }
+    .logo {
+      height: 80px;
+      margin-right: 20px;
+    }
+    .title {
+      font-size: 40px;
+      font-weight: bold;
+    }
+    .indicators {
+      grid-column: 2;
+      grid-row: 5;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .navi-indicator {
+      height: 4px;
+      width: 0;
+      border-radius: 20px;
+      transition: width 0.2s;
+    }
+    #ni1 { background: var(--icolor1); }
+    #ni2 { background: var(--icolor2); }
+    #ni3 { background: var(--icolor3); }
+    #ni4 { background: var(--icolor4); }
 
+    .navi {
+      grid-column: 2;
+      grid-row: 4;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+      z-index: 1;
+    }
+    .navi-item1, .navi-item2, .navi-item3, .navi-item4 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-button {
+      position: relative;
+      z-index: 10;
+      height: 70px;
+      width: 70px;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, #e6e4da, #ffffff);
+      box-shadow: 6px 6px 10px #cfcdc4, -6px -6px 10px #ffffff;
+      font-family: "Rubik", sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border: none;
+    }
+    #startersbutton .navi-icon { color: var(--icolor1); }
+    #dessertsbutton .navi-icon { color: var(--icolor3); }
+    #mainsbutton .navi-icon { color: var(--icolor2); }
+    #drinksbutton .navi-icon { color: var(--icolor4); }
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rubik:wght@300;700&display=swap" rel="stylesheet">
-<style>
-  /*<!--- 
-Restaurant Menu
--->*/
- 
-:root {
-	--bg: #fffdf2;
-	--tst: #d1e8ff;
-	--radius: 10px;
-	--icolor1: #c4e85a;
-	--icolor2: #ffb370;
-	--icolor3: #d65ae8;
-	--icolor4: #63c8ff;
-}
+    .navi-icon {
+      font-size: 25px;
+      display: block;
+    }
+    .navi-text {
+      font-size: 0.9em;
+      font-weight: 300;
+    }
+    .menu {
+      grid-column: 2;
+      grid-row: 2 / span 2;
+      overflow-y: auto;
+      position: relative;
+      z-index: 1;
+    }
 
-body {
-	font-family: "Rubik", sans-serif;
-	color: #111;
-}
+    .menu-separator {
+      margin: 15px;
+      margin-top: 35px;
+      padding-left: 30px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 1.2em;
+      font-weight: 700;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, #ffffff, #e6e4da);
+      box-shadow: 6px 6px 10px #c7c5bd, -6px -6px 10px #ffffff;
+    }
+    .menu-item, .drink-item {
+      margin: 15px;
+      padding-left: 30px;
+      background: linear-gradient(145deg, #ffffff, #e6e4da);
+      box-shadow: 6px 6px 10px #c7c5bd, -6px -6px 10px #ffffff;
+      border-radius: var(--radius);
+      display: grid;
+      font-size: 0.9em;
+    }
+    .menu-item {
+      grid-template-columns: auto 90px;
+      grid-template-rows: 40px 60px;
+      height: 110px;
+    }
+    .drink-item {
+      grid-template-columns: auto 30px 90px;
+      grid-template-rows: 50px;
+      height: 50px;
+    }
+    .menu-item-name, .drink-item-name {
+      font-weight: 700;
+    }
+    .menu-item-price, .drink-item-price {
+      font-weight: 700;
+      text-align: center;
+    }
 
-.container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 100vh;
-	display: grid;
-	grid-template-columns: 5% auto 5%;
-	grid-template-rows: 140px 80px auto 100px 30px;
-	background: var(--bg);
-	/* mobile viewport bug fix */
-	height: -webkit-fill-available;
-}
-
-.header {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	grid-row-start: 1;
-	grid-row-end: 2;
-	font-family: "Dancing Script", cursive;
-}
-
-.title {
-	width: 100%;
-	height: 100%;
-	line-height: 150px;
-	font-size: 70px;
-	text-align: center;
-}
-
-.indicators {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	grid-row-start: 5;
-	grid-row-end: 5;
-	display: grid;
-	grid-template-columns: 25% 25% 25% 25%;
-	grid-template-rows: 10px;
-}
-
-#i1,
-#i2,
-#i3,
-#i4 {
-	grid-column-start: 1;
-	grid-column-end: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-#i2 {
-	grid-column-start: 2;
-	grid-column-end: 2;
-}
-#i3 {
-	grid-column-start: 3;
-	grid-column-end: 3;
-}
-#i4 {
-	grid-column-start: 4;
-	grid-column-end: 4;
-}
-
-.navi-indicator {
-	height: 4px;
-	width: 60px;
-	border-radius: 20px;
-	transition: width 0.2s;
-}
-
-#ni1{
-	background: var(--icolor1);	
-}
-#ni2{
-	background: var(--icolor2);
-}
-#ni3{
-	background: var(--icolor3);
-}
-#ni4{
-	background: var(--icolor4);
-}
-
-.navi {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	grid-row-start: 4;
-	grid-row-end: 4;
-	display: grid;
-	grid-template-columns: 25% 25% 25% 25%;
-	grid-template-rows: 100px;
-}
-
-.navi-item1,
-.navi-item2,
-.navi-item3,
-.navi-item4 {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.navi-item2 {
-	grid-column-start: 2;
-	grid-column-end: 2;
-}
-.navi-item3 {
-	grid-column-start: 3;
-	grid-column-end: 3;
-}
-.navi-item4 {
-	grid-column-start: 4;
-	grid-column-end: 4;
-}
-
-.nav-button {
-	height: 70px;
-	width: 70px;
-	border-radius: 20px;
-	background: linear-gradient(145deg, #e6e4da, #ffffff);
-	box-shadow: 6px 6px 10px #cfcdc4, -6px -6px 10px #ffffff;
-	font-family: "Rubik", sans-serif;
-	font-weight: 700;
-	cursor: pointer;
-}
-
-#startersbutton .navi-icon {
-	color: var(--icolor1);
-}
-#mainsbutton .navi-icon {
-	color: var(--icolor2);
-}
-#dessertsbutton .navi-icon {
-	color: var(--icolor3);
-}
-#drinksbutton .navi-icon {
-	color: var(--icolor4);
-}
-
-.navi-icon {
-	height: 40px;
-	line-height: 50px;
-	font-size: 20px;
-	text-align: center;
-}
-
-.navi-text {
-	height: 30px;
-	line-height: 20px;
-	text-align: center;
-	font-size: 0.9em;
-	font-weight: 300;
-}
-
-.menu {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	grid-row-start: 2;
-	grid-row-end: 4;
-	overflow-y: auto;
-}
-
-.menu-item {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	height: 110px;
-	margin: 15px;
-	display: grid;
-	grid-template-columns: auto 90px;
-	grid-template-rows: 40px 60px;
-	font-size: 0.9em;
-	border-radius: var(--radius);
-	padding-left: 30px;
-	padding-top: 10px;
-	background: linear-gradient(145deg, #ffffff, #e6e4da);
-	box-shadow: 6px 6px 10px #c7c5bd, -6px -6px 10px #ffffff;
-}
-.menu-item-name {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	grid-row-start: 1;
-	grid-row-end: 2;
-	font-weight: 700;
-	line-height: 50px;
-}
-.menu-item-description {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	grid-row-start: 2;
-	grid-row-end: 2;
-}
-.menu-item-price {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	grid-row-start: 1;
-	grid-row-end: 3;
-	font-weight: 700;
-	line-height: 100px;
-	text-align: center;
-}
-
-.drink-item {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	height: 50px;
-	margin: 15px;
-	display: grid;
-	grid-template-columns: auto 30px 90px;
-	grid-template-rows: 50px;
-	font-size: 0.9em;
-	border-radius: var(--radius);
-	padding-left: 30px;
-	padding-top: 10px;
-	background: linear-gradient(145deg, #ffffff, #e6e4da);
-	box-shadow: 6px 6px 10px #c7c5bd, -6px -6px 10px #ffffff;
-}
-.drink-item-name {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	font-weight: 700;
-	line-height: 50px;
-}
-.drink-item-description {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	line-height: 50px;
-}
-.drink-item-price {
-	grid-column-start: 3;
-	grid-column-end: 3;
-	font-weight: 700;
-	line-height: 50px;
-	text-align: center;
-}
-
-.menu-separator {
-	grid-column-start: 2;
-	grid-column-end: 2;
-	height: 50px;
-	margin: 15px;
-	margin-top: 35px;
-	font-size: 1.2em;
-	line-height: 50px;
-	font-weight: 700;
-	border-radius: var(--radius);
-	padding-left: 30px;
-	background: linear-gradient(145deg, #ffffff, #e6e4da);
-	box-shadow: 6px 6px 10px #c7c5bd, -6px -6px 10px #ffffff;
-}
-
-/*Desktop Stuff*/
-@media only screen and (min-width: 800px) {
-	.container {
-		grid-template-rows: 150px 100px 20px auto 20px;
-	}
-	.indicators {
-		grid-row-start: 3;
-		grid-row-end: 4;
-	}
-	.navi-indicator {
-		height: 4px;
-		width: 100%;
-		margin: 15px;
-	}
-	.navi {
-		grid-row-start: 2;
-		grid-row-end: 3;
-	}
-	.navi-item1,
-	.navi-item2,
-	.navi-item3,
-	.navi-item4 {
-		display: flex;
-	}
-	.nav-button {
-		height: 70px;
-		width: 100%;
-		margin: 15px;
-		display: flex;
-		justify-content: center;
-		border-radius: var(--radius);
-	}
-	.navi-icon {
-		height: 100%;
-		line-height: 70px;
-		font-size: 25px;
-		text-align: center;
-	}
-	.navi-text {
-		line-height: 70px;
-		margin-left: 10px;
-		text-align: left;
-		font-size: 1.3em;
-		font-weight: 700;
-	}
-	.menu {
-		grid-row-start: 4;
-		grid-row-end: 4;
-	}
-}
-
-/*prevent defaults*/
-button,
-p {
-	display: inline-block;
-	border: none;
-	margin: 0;
-	text-decoration: none;
-	padding: 0;
-	background: none;
-	border-radius: 0;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	overflow: hidden;
-	user-select: none;
-	-webkit-tap-highlight-color: transparent;
-}
-input {
-	padding: 0;
-}
-input:focus {
-	outline: none;
-}
-button:focus {
-	outline: none;
-	color: var(--maincolor);
-}
-
-textarea:focus {
-	outline: none;
-}
-select:focus {
-	color: #39a;
-}
-a,
-a:link,
-a:visited {
-	color: var(--maincolor);
-}
-.header {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-}
-
-.logo {
-  height: 80px;
-  margin-right: 20px;
-}
-
-.title {
-  font-size: 40px;
-  font-weight: bold;
-}
-
-</style>
-<div class="container">
-	<div class="header">
-  <img src="logo-removebg-preview.png" alt="Logo" class="logo">
-  <div class="title">Menu</div>
-</div>
-
-	<div class="indicators">
-		<div id="i1">
-			<div class="navi-indicator" id="ni1"></div>
-		</div>
-		<div id="i2">
-			<div class="navi-indicator" id="ni2"></div>
-		</div>
-		<div id="i3">
-			<div class="navi-indicator" id="ni3"></div>
-		</div>
-		<div id="i4">
-			<div class="navi-indicator" id="ni4"></div>
-		</div>
-	</div>
-	<div class="navi">
-  <div class="navi-item1">
-    <button class="nav-button" id="startersbutton">
-      <div class="navi-icon"><i class="fas fa-seedling"></i></div>
-      <div class="navi-text">Les Entrées</div>
-    </button>
+    /* Responsive desktop */
+    @media(min-width:800px) {
+      .container { grid-template-rows: 150px 100px 20px auto 20px; }
+      .nav-button { width: 100%; height: 70px; margin: 15px; flex-direction: row; }
+      .navi-icon { font-size: 25px; }
+      .navi-text { font-size: 1.3em; margin-left: 10px; font-weight: 700; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="logo-removebg-preview.png" alt="Logo" class="logo">
+      <div class="title">Menu</div>
+    </div>
+    <div class="indicators">
+      <div><div class="navi-indicator" id="ni1"></div></div>
+      <div><div class="navi-indicator" id="ni2"></div></div>
+      <div><div class="navi-indicator" id="ni3"></div></div>
+      <div><div class="navi-indicator" id="ni4"></div></div>
+    </div>
+    <div class="navi">
+      <div class="navi-item1">
+        <button class="nav-button" id="startersbutton">
+          <div class="navi-icon"><i class="fas fa-seedling"></i></div>
+          <div class="navi-text">Entrées</div>
+        </button>
+      </div>
+      <div class="navi-item2">
+        <button class="nav-button" id="dessertsbutton">
+          <div class="navi-icon"><i class="fas fa-ice-cream"></i></div>
+          <div class="navi-text">Desserts</div>
+        </button>
+      </div>
+      <div class="navi-item3">
+        <button class="nav-button" id="mainsbutton">
+          <div class="navi-icon"><i class="fas fa-pizza-slice"></i></div>
+          <div class="navi-text">Plats</div>
+        </button>
+      </div>
+      <div class="navi-item4">
+        <button class="nav-button" id="drinksbutton">
+          <div class="navi-icon"><i class="fas fa-wine-glass-alt"></i></div>
+          <div class="navi-text">Boissons</div>
+        </button>
+      </div>
+    </div>
+    <div class="menu"></div>
   </div>
 
-  <div class="navi-item2">
-    <button class="nav-button" id="dessertsbutton">
-      <div class="navi-icon"><i class="fas fa-ice-cream"></i></div>
-      <div class="navi-text">Desserts</div>
-    </button>
-  </div>
+  <script>
+    const Entree = [ /* ... votre tableau d’entrées ... */ ];
+    const mains = [ /* ... vos plats ... */ ];
+    const desserts = [ /* ... vos desserts ... */ ];
+    const drinks = [ /* ... vos boissons ... */ ];
 
-  <div class="navi-item3">
-    <button class="nav-button" id="mainsbutton">
-      <div class="navi-icon"><i class="fas fa-pizza-slice"></i></div>
-      <div class="navi-text">Plats</div>
-    </button>
-  </div>
+    let sl = 0;
+    const btns = {
+      startersbutton: Entree,
+      dessertsbutton: desserts,
+      mainsbutton: mains,
+      drinksbutton: drinks
+    };
 
-  <div class="navi-item4">
-    <button class="nav-button" id="drinksbutton">
-      <div class="navi-icon"><i class="fas fa-wine-glass-alt"></i></div>
-      <div class="navi-text">Boissons</div>
-    </button>
-  </div>
-</div>
+    const ni = [
+      document.getElementById("ni1"),
+      document.getElementById("ni2"),
+      document.getElementById("ni3"),
+      document.getElementById("ni4")
+    ];
 
-	<div class="menu">
-		<div class="menu-separator">Separator</div>
-		<div class="menu-item">
-			<div class="menu-item-name">Food</div>
-			<div class="menu-item-description">Food yada yada</div>
-			<div class="menu-item-price">17.50</div>
-		</div>
-		<div class="menu-separator">Separator</div>
-		<div class="drink-item">
-			<div class="drink-item-name">Drink</div>
-			<div class="drink-item-description">3.3dl</div>
-			<div class="drink-item-price">4.50</div>
-		</div>
-	</div>
-</div>
-<script>
-  //////////////////////
-//Restaurant Menu
-//////////////////////
-const Entree = [
-  { type: "separator", description: "APPETIZERS" },
-  { type: "food", name: "CROSTINI", description: "with diced tomatoes, onions, garlic and basil", price: "12.00" },
-  { type: "food", name: "NACHOS", description: "with 2 dips of your choice, gratinated with cheese and sliced chicken", price: "10.50" },
-  { type: "separator", description: "SALADS" },
-  { type: "food", name: "CHICKEN CHILI SALAD", description: "mixed salad, fried sliced chicken marinated with honey and chili", price: "25.00" },
-  { type: "food", name: "FENNEL-APPLE SALAD", description: "with rocket, feta, cranberries and pumpkin seeds", price: "15.00" },
-  { type: "food", name: "CAESAR'S SALAD", description: "Lettuce with fried baconstrips, croûtons, Grana Padano, egg and Caesar Dressing", price: "16.00" }
-];
+    Object.entries(btns).forEach(([id, items], idx) => {
+      document.getElementById(id)
+        .addEventListener("click", () => {
+          setIndicator(idx);
+          populateItems(items);
+        });
+    });
 
-const mains = [
-  { type: "separator", description: "PIZZA" },
-  { type: "food", name: "MARGHERITA", description: "Tomato sauce, mozzarella, organic oregano", price: "18.00" },
-  { type: "food", name: "PROSCIUTTO", description: "Tomato sauce, mozzarella, ham, organic oregano", price: "21.50" },
-  { type: "food", name: "SALAME", description: "Tomato sauce, mozzarella, salami, organic oregano", price: "21.00" },
-  { type: "food", name: "TONNO", description: "Tomato sauce, mozzarella, tuna MSC, capers, organic oregano", price: "19.50" },
-  { type: "separator", description: "MEAT & FISH" },
-  { type: "food", name: "SURF & TURF", description: "Beef entrecôte with herb butter, vegetables and fries", price: "48.00" },
-  { type: "food", name: "RUMP STEAK", description: "with café de paris herbs butter, fries and vegetables", price: "35.00" },
-  { type: "food", name: "FISH & CHIPS", description: "Cod in beer batter with french fries and mashed peas", price: "25.00" },
-  { type: "separator", description: "PASTA" },
-  { type: "food", name: "LINGUINE", description: "on spinach sauce with cherry tomatoes, fennel, feta and pine nuts", price: "25.00" },
-  { type: "food", name: "RAVIOLI", description: "filled with truffle-ricotta and hazelnuts butter", price: "28.50" }
-];
+    function setIndicator(sel) {
+      sl = sel;
+      const width = window.innerWidth < 800 ? "60px" : "85%";
+      ni.forEach((el, i) => {
+        el.style.width = i === sel ? width : "0";
+      });
+    }
 
-const desserts = [
-  { type: "separator", description: "SWEETS" },
-  { type: "food", name: "CHOCOLATE MOUSSE", description: "with star anise, a pecan brownie and salty caramel sauce", price: "12.00" },
-  { type: "food", name: "TIRAMISU", description: "rolled rhubarb pistachio with vanilla strawberry amaretto sauce", price: "13.50" },
-  { type: "food", name: "FRUIT SALAD", description: "exotic fruits with tapioca pearls mango sorbet and homemade coconut liqueur", price: "10.50" }
-];
+    function populateItems(items) {
+      const menu = document.querySelector(".menu");
+      menu.innerHTML = "";
+      items.forEach(it => {
+        const div = document.createElement(it.type === "separator" ? "div" : it.type === "food" ? "div" : "div");
+        div.className = it.type + (it.type === "separator" ? "-separator" : it.type === "drink" ? "-item" : "-item");
+        if(it.type === "separator") {
+          div.textContent = it.description;
+        } else {
+          const name = document.createElement("div");
+          const desc = document.createElement("div");
+          const price = document.createElement("div");
+          name.className = it.type + "-item-name";
+          desc.className = it.type === "food" ? "menu-item-description" : "drink-item-description";
+          price.className = it.type + "-item-price";
+          name.textContent = it.name;
+          desc.textContent = it.description;
+          price.textContent = it.price + " €";
+          div.append(name, desc, price);
+        }
+        menu.appendChild(div);
+      });
+    }
 
-const drinks = [
-  { type: "separator", description: "WATER & SODA" },
-  { type: "drink", name: "SPARKLING WATER", description: "5dl", price: "4.50" },
-  { type: "drink", name: "STILL WATER", description: "5dl", price: "4.50" },
-  { type: "drink", name: "SODA", description: "3dl", price: "5.50" },
-  { type: "drink", name: "TAP WATER", description: "", price: "FREE" },
-  { type: "separator", description: "BEER" },
-  { type: "drink", name: "BADENER GOLD", description: "3dl", price: "4.80" },
-  { type: "drink", name: "BADENER GOLD", description: "5dl", price: "7.00" },
-  { type: "drink", name: "QUÖLLFRISCH", description: "5dl", price: "7.50" },
-  { type: "drink", name: "BIER PAUL 02", description: "3.3dl", price: "6.00" },
-  { type: "separator", description: "RED WINE" },
-  { type: "drink", name: "MERLOT DEL TICINO", description: "1dl", price: "7.00" },
-  { type: "drink", name: "BOLGHERI ROSSO", description: "1dl", price: "8.50" },
-  { type: "drink", name: "NERO D’AVOLA IGT", description: "1dl", price: "7.50" },
-  { type: "drink", name: "MONTE CASTANHEIRO", description: "1dl", price: "8.00" },
-  { type: "separator", description: "WHITE WINE & CHAMPAGNE" },
-  { type: "drink", name: "ST. SAPHORIN7", description: "1dl", price: "7.00" },
-  { type: "drink", name: "BASILICATA BIANCO", description: "1dl", price: "7.50" },
-  { type: "drink", name: "TAITTINGER BRUT", description: "7.5dl", price: "91.00" },
-  { type: "separator", description: "WHISKY" },
-  { type: "drink", name: "OBAN 14 YEARS", description: "4cl", price: "13.50" },
-  { type: "drink", name: "LAGAVULIN 16 YEARS", description: "4cl", price: "15.00" },
-  { type: "drink", name: "MACALLEN AMBER", description: "4cl", price: "16.00" },
-  { type: "separator", description: "HOT DRINKS" },
-  // Tu peux compléter ici les boissons chaudes si tu veux
-];
-
-
-/////////////////////////////////////////////////////////////////
-let sl = 0;
-
-let startersbutton = document.getElementById("startersbutton");
-let mainsbutton = document.getElementById("mainsbutton");
-let dessertsbutton = document.getElementById("dessertsbutton");
-let drinksbutton = document.getElementById("drinksbutton");
-
-let ni1 = document.getElementById("ni1");
-let ni2 = document.getElementById("ni2");
-let ni3 = document.getElementById("ni3");
-let ni4 = document.getElementById("ni4");
-
-startersbutton.addEventListener("click", (e) => {
-	setIndicator(0);
-	populateItems(Entree);
-});
-
-dessertsbutton.addEventListener("click", (e) => {
-	setIndicator(1);
-	populateItems(desserts);
-});
-
-mainsbutton.addEventListener("click", (e) => {
-	setIndicator(2);
-	populateItems(mains);
-});
-
-drinksbutton.addEventListener("click", (e) => {
-	setIndicator(3);
-	populateItems(drinks);
-});
-
-function populateItems(items) {
-	let menu = document.querySelector(".menu");
-	menu.innerHTML = "";
-	for (i = 0; i < items.length; i++) {
-		if (items[i].type === "separator") {
-			let menuitem = document.createElement("div");
-			menuitem.setAttribute("class", "menu-separator");
-			menuitem.innerHTML = items[i].description;
-			menu.appendChild(menuitem);
-		}
-		if (items[i].type === "food") {
-			let menuitem = document.createElement("div");
-			let menuitemname = document.createElement("div");
-			let menuitemdesc = document.createElement("div");
-			let menuitemprize = document.createElement("div");
-			menuitem.setAttribute("class", "menu-item");
-			menuitemname.setAttribute("class", "menu-item-name");
-			menuitemdesc.setAttribute("class", "menu-item-description");
-			menuitemprize.setAttribute("class", "menu-item-price");
-
-			menuitemname.innerHTML = items[i].name;
-			menuitemdesc.innerHTML = items[i].description;
-			menuitemprize.innerHTML = items[i].price + " €";
-
-			menuitem.appendChild(menuitemname);
-			menuitem.appendChild(menuitemdesc);
-			menuitem.appendChild(menuitemprize);
-			menu.appendChild(menuitem);
-		}
-		if (items[i].type === "drink") {
-			let drinkitem = document.createElement("div");
-			let drinkitemname = document.createElement("div");
-			let drinkitemdesc = document.createElement("div");
-			let drinkitemprize = document.createElement("div");
-			drinkitem.setAttribute("class", "drink-item");
-			drinkitemname.setAttribute("class", "drink-item-name");
-			drinkitemdesc.setAttribute("class", "drink-item-description");
-			drinkitemprize.setAttribute("class", "drink-item-price");
-
-			drinkitemname.innerHTML = items[i].name;
-			drinkitemdesc.innerHTML = items[i].description;
-			drinkitemprize.innerHTML = items[i].price + " €";
-
-			drinkitem.appendChild(drinkitemname);
-			drinkitem.appendChild(drinkitemdesc);
-			drinkitem.appendChild(drinkitemprize);
-			menu.appendChild(drinkitem);
-		}
-	}
-}
-function setIndicator(sel) {
-	sl = sel;
-	let vp = "";
-	if (window.innerWidth < 800) {
-		vp = "60px";
-	} else {
-		vp = "85%";
-	}
-	let elems = [ni1, ni2, ni3, ni4];
-	elems.forEach((el, i) => {
-		if (i === sel) {
-			el.firstElementChild.style.width = vp;
-		} else {
-			el.firstElementChild.style.width = "0";
-		}
-	});
-}
-
-
-window.addEventListener("resize", (e) => {
-	setIndicator(sl);
-});
-
-//default runs
-setIndicator(sl);
-populateItems(starters);
-
-</script>
+    window.addEventListener("resize", () => setIndicator(sl));
+    setIndicator(sl);
+    populateItems(Entree);
+  </script>
+</body>
+</html>
