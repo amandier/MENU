@@ -1,0 +1,50 @@
+[
+  {
+    "categorie": "Entrées",
+    "plats": [
+      "Salade de chèvre chaud",
+      "Soupe de potiron et noisettes grillées",
+      "Tartare de saumon aux agrumes",
+      "Carpaccio de bœuf au parmesan",
+      "Velouté de champignons truffé",
+      "Croustillant de crevettes et sauce aigre-douce"
+    ]
+  },
+  {
+    "categorie": "Plats",
+    "plats": [
+      "Magret de canard sauce miel",
+      "Filet de bar au beurre blanc",
+      "Risotto aux champignons forestiers",
+      "Pavé de saumon, légumes croquants",
+      "Côte de bœuf, sauce poivre",
+      "Poulet rôti farci aux herbes",
+      "Burger gourmet et frites maison",
+      "Tagliatelles à la truffe",
+      "Assiette végétarienne du chef"
+    ]
+  },
+  {
+    "categorie": "Desserts",
+    "plats": [
+      "Tiramisu au café",
+      "Fondant au chocolat et glace vanille",
+      "Tarte citron meringuée",
+      "Salade de fruits frais",
+      "Crème brûlée à la vanille",
+      "Mousse aux fruits rouges"
+    ]
+  },
+  {
+    "categorie": "Boissons",
+    "plats": [
+      "Coca-Cola / Coca Zéro",
+      "Fanta / Orangina / Ice Tea",
+      "Eaux minérales (plate/gazeuse)",
+      "Jus de fruits (orange, pomme, ananas)",
+      "Bière blonde / brune",
+      "Vin rouge / blanc / rosé (au verre ou à la bouteille)",
+      "Cocktails maison"
+    ]
+  }
+]
