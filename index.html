@@ -1,177 +1,198 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Menu Restaurant</title>
-  <style>
-    :root {
-      --radius: 8px;
-      --main-color: #333;
-      --accent-color: #d35400;
-      --bg-color: #f5f5f5;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: var(--bg-color);
-      margin: 0;
-      padding: 0 20px 40px;
-      color: var(--main-color);
-    }
-
-    /* ==== NAVIGATION - Gardée telle quelle ==== */
-    nav {
-      background-color: var(--accent-color);
-      padding: 15px 20px;
-      color: white;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      gap: 20px;
-    }
-
-    nav ul li {
-      cursor: pointer;
-      user-select: none;
-    }
-
-    nav ul li:hover {
-      text-decoration: underline;
-    }
-
-    /* ==== CONTENU MENU ==== */
-    #menuListe {
-      max-width: 700px;
-      margin: 30px auto;
-    }
-
-    .menu-item {
-      display: flex;
-      background: #fff;
-      padding: 15px;
-      border-radius: var(--radius);
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
-      margin-bottom: 15px;
-      gap: 15px;
-      align-items: flex-start;
-    }
-
-    .menu-item-image {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: var(--radius);
-      flex-shrink: 0;
-    }
-
-    .menu-item-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .menu-item-name {
-      font-weight: bold;
-      margin: 0 0 5px 0;
-      font-size: 1.1rem;
-    }
-
-    .menu-item-description {
-      font-size: 0.9rem;
-      color: #555;
-      margin: 0;
-    }
-
-    .menu-item-price {
-      font-weight: bold;
-      font-size: 1rem;
-      margin-left: 10px;
-      white-space: nowrap;
-      align-self: flex-start;
-      color: var(--accent-color);
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Menu avec images</title>
+<style>
+  body {
+    background-color: #f2f2f2;
+    font-family: "Arial", sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+  .menu {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .menu-separator {
+    background-color: #d15a2f;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 8px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .menu-item,
+  .drink-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  }
+  .menu-item-image {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+  .menu-item-name,
+  .drink-item-name {
+    font-weight: 700;
+    font-size: 18px;
+    color: #d15a2f;
+  }
+  .menu-item-description,
+  .drink-item-description {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+  }
+  .menu-item-price,
+  .drink-item-price {
+    margin-left: auto;
+    font-weight: 700;
+    font-size: 18px;
+    color: #d15a2f;
+  }
+  /* Structure texte à droite */
+  .menu-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+</style>
 </head>
 <body>
+  <div class="menu"></div>
 
-  <!-- NAVIGATION - inchangée -->
-  <nav>
-    <ul>
-      <li>Accueil</li>
-      <li>Menu</li>
-      <li>Contact</li>
-    </ul>
-  </nav>
+<script>
+const imageUrl = "https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?ga=GA1.1.2128109423.1749430756&w=740";
 
-  <!-- Conteneur liste des plats -->
-  <div id="menuListe"></div>
+const starters = JSON.parse(
+  "[" +
+    '{ "type":"separator", "description":"APPETIZERS" },' +
+    '{ "type":"food", "name":"CROSTINI", "description":"with diced tomatoes, onions, garlic and basil", "price":"12.00", "image":"' + imageUrl + '" },' +
+    '{ "type":"food", "name":"NACHOS", "description":"with 2 dips of your choice, gratinated with cheese and sliced chicken", "price":"10.50", "image":"' + imageUrl + '" },' +
+    '{ "type":"food", "name":"SAMOSA", "description":"potato filled samosas served with spicy sauce", "price":"9.00", "image":"' + imageUrl + '" },' +
+    '{ "type":"food", "name":"CHICKEN WINGS", "description":"chicken wings marinated in peri-peri sauce", "price":"10.00", "image":"' + imageUrl + '" }' +
+  "]"
+);
 
-  <script>
-    // Exemple de données de plats
-    const plats = [
-      {
-        nom: "Pizza Margherita",
-        description: "Tomate, mozzarella, basilic frais",
-        prix: 8.50,
-        image: "https://cdn.pixabay.com/photo/2016/11/18/15/04/pizza-1839656_1280.jpg"
-      },
-      {
-        nom: "Spaghetti Carbonara",
-        description: "Pâtes, œufs, pancetta, parmesan",
-        prix: 12.00,
-        image: "https://cdn.pixabay.com/photo/2018/05/29/22/40/spaghetti-3441367_1280.jpg"
-      },
-      {
-        nom: "Salade César",
-        description: "Laitue, poulet grillé, parmesan, croûtons",
-        prix: 9.00,
-        image: "https://cdn.pixabay.com/photo/2017/06/02/18/24/caesar-salad-2361379_1280.jpg"
-      }
-    ];
+const mains = JSON.parse(
+  "[" +
+    '{ "type":"separator", "description":"MAIN COURSES" },' +
+    '{ "type":"food", "name":"RAVIOLI", "description":"served with basil pesto and cream sauce", "price":"15.00", "image":"' + imageUrl + '" },' +
+    '{ "type":"food", "name":"CHICKEN CURRY", "description":"chicken cooked with creamy spicy sauce", "price":"17.00", "image":"' + imageUrl + '" },' +
+    '{ "type":"food", "name":"VEGETABLE LASAGNE", "description":"layers of pasta, tomato and cheese", "price":"13.50", "image":"' + imageUrl + '" }' +
+  "]"
+);
 
-    const menuListe = document.getElementById("menuListe");
+const desserts = JSON.parse(
+  "[" +
+    '{ "type":"separator", "description":"DESSERTS" },' +
+    '{ "type":"food", "name":"CHEESECAKE", "description":"with strawberry topping", "price":"6.50", "image":"' + imageUrl + '" },' +
+    '{ "type":"food", "name":"CHOCOLATE MOUSSE", "description":"rich chocolate mousse with cream", "price":"7.00", "image":"' + imageUrl + '" }' +
+  "]"
+);
 
-    plats.forEach(plat => {
-      const item = document.createElement("div");
-      item.className = "menu-item";
+const drinks = JSON.parse(
+  "[" +
+    '{ "type":"separator", "description":"DRINKS" },' +
+    '{ "type":"drink", "name":"COFFEE", "description":"freshly brewed coffee", "price":"3.00", "image":"' + imageUrl + '" },' +
+    '{ "type":"drink", "name":"TEA", "description":"assorted herbal teas", "price":"2.50", "image":"' + imageUrl + '" },' +
+    '{ "type":"drink", "name":"FRESH JUICE", "description":"orange or apple", "price":"4.00", "image":"' + imageUrl + '" }' +
+  "]"
+);
 
-      const image = document.createElement("img");
-      image.className = "menu-item-image";
-      image.src = plat.image;
-      image.alt = plat.nom;
+// On rassemble tous les plats et boissons dans un seul tableau
+const allItems = [...starters, ...mains, ...desserts, ...drinks];
 
-      const content = document.createElement("div");
-      content.className = "menu-item-content";
+function populateItems(items) {
+  let menu = document.querySelector(".menu");
+  menu.innerHTML = "";
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].type === "separator") {
+      let menuitem = document.createElement("div");
+      menuitem.setAttribute("class", "menu-separator");
+      menuitem.textContent = items[i].description;
+      menu.appendChild(menuitem);
+    }
+    if (items[i].type === "food") {
+      let menuitem = document.createElement("div");
+      let menuitemimage = document.createElement("img");
+      let textContainer = document.createElement("div");
+      let menuitemname = document.createElement("div");
+      let menuitemdesc = document.createElement("div");
+      let menuitemprize = document.createElement("div");
 
-      const name = document.createElement("h3");
-      name.className = "menu-item-name";
-      name.textContent = plat.nom;
+      menuitem.setAttribute("class", "menu-item");
+      menuitemimage.setAttribute("class", "menu-item-image");
+      menuitemimage.src = items[i].image || "";
+      menuitemimage.alt = items[i].name;
 
-      const description = document.createElement("p");
-      description.className = "menu-item-description";
-      description.textContent = plat.description;
+      textContainer.setAttribute("class", "menu-text");
 
-      const price = document.createElement("span");
-      price.className = "menu-item-price";
-      price.textContent = plat.prix.toFixed(2) + " €";
+      menuitemname.setAttribute("class", "menu-item-name");
+      menuitemdesc.setAttribute("class", "menu-item-description");
+      menuitemprize.setAttribute("class", "menu-item-price");
 
-      content.appendChild(name);
-      content.appendChild(description);
+      menuitemname.textContent = items[i].name;
+      menuitemdesc.textContent = items[i].description;
+      menuitemprize.textContent = items[i].price;
 
-      item.appendChild(image);
-      item.appendChild(content);
-      item.appendChild(price);
+      textContainer.appendChild(menuitemname);
+      textContainer.appendChild(menuitemdesc);
 
-      menuListe.appendChild(item);
-    });
-  </script>
+      menuitem.appendChild(menuitemimage);
+      menuitem.appendChild(textContainer);
+      menuitem.appendChild(menuitemprize);
 
+      menu.appendChild(menuitem);
+    }
+    if (items[i].type === "drink") {
+      let drinkitem = document.createElement("div");
+      let drinkitemimage = document.createElement("img");
+      let textContainer = document.createElement("div");
+      let drinkitemname = document.createElement("div");
+      let drinkitemdesc = document.createElement("div");
+      let drinkitemprize = document.createElement("div");
+
+      drinkitem.setAttribute("class", "drink-item");
+      drinkitemimage.setAttribute("class", "menu-item-image");
+      drinkitemimage.src = items[i].image || "";
+      drinkitemimage.alt = items[i].name;
+
+      textContainer.setAttribute("class", "menu-text");
+
+      drinkitemname.setAttribute("class", "drink-item-name");
+      drinkitemdesc.setAttribute("class", "drink-item-description");
+      drinkitemprize.setAttribute("class", "drink-item-price");
+
+      drinkitemname.textContent = items[i].name;
+      drinkitemdesc.textContent = items[i].description;
+      drinkitemprize.textContent = items[i].price;
+
+      textContainer.appendChild(drinkitemname);
+      textContainer.appendChild(drinkitemdesc);
+
+      drinkitem.appendChild(drinkitemimage);
+      drinkitem.appendChild(textContainer);
+      drinkitem.appendChild(drinkitemprize);
+
+      menu.appendChild(drinkitem);
+    }
+  }
+}
+
+populateItems(allItems);
+</script>
 </body>
 </html>
