@@ -1,142 +1,140 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-    />
-    <link rel="stylesheet" href="src/styles.css" />
-    <title>Restaurant Menu</title>
-  </head>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Menu interactif du Restaurant</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff8f0;
+    margin: 0; padding: 0;
+    color: #333;
+  }
+  header {
+    background: #f57224;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    background: #f9a357;
+  }
+  nav button {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    border: none;
+    background: #f9a357;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  nav button:hover, nav button.active {
+    background: #d6681c;
+  }
+  main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 15px 40px;
+  }
+  section {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  section.active {
+    display: block;
+  }
+  h2 {
+    border-bottom: 2px solid #f57224;
+    padding-bottom: 6px;
+    margin-bottom: 15px;
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0cba5;
+  }
+  .item-name {
+    font-weight: 600;
+  }
+  .item-price {
+    font-weight: 600;
+    color: #d6681c;
+  }
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  /* Responsive */
+  @media (max-width: 480px) {
+    nav button {
+      font-size: 1rem;
+      padding: 10px 0;
+    }
+    main {
+      max-width: 90%;
+    }
+  }
+</style>
+</head>
+<body>
 
-  <body>
-    <main class="container">
-      <div class="menu">
-        <h2 class="menu-group-heading">Entrée</h2>
-        <div class="menu-group">
-          <div class="menu-item">
-            <img
-              src="https://dummyimage.com/600x400/000/fff"
-              alt="Black Placeholder Image"
-              class="menu-item-img"
-            />
-            <div class="menu-item-text">
-              <h3 class="menu-item-heading">
-                <span class="menu-item-name">Bruschetta</span>
-                <span class="menu-item-price">$12.90</span>
-              </h3>
-              <p class="menu-item-desc">
-                Nunc efficitur felis vel mi efficitur, sed molestie sem
-                scelerisque. Fusce orci risus, congue eu mauris nec, pretium
-                tincidunt nulla.
-              </p>
-            </div>
-          </div>
-          <div class="menu-item">
-            <img
-              src="https://dummyimage.com/600x400/ccc/fff"
-              alt="Black Placeholder Image"
-              class="menu-item-img"
-            />
-            <div class="menu-item-text">
-              <h3 class="menu-item-heading">
-                <span class="menu-item-name">Bruschetta</span>
-                <span class="menu-item-price">$12.90</span>
-              </h3>
-              <p class="menu-item-desc">
-                Nunc efficitur felis vel mi efficitur, sed molestie sem
-                scelerisque. Fusce orci risus, congue eu mauris nec, pretium
-                tincidunt nulla.
-              </p>
-            </div>
-          </div>
-          <div class="menu-item">
-            <img
-              src="https://dummyimage.com/600x400/000/fff"
-              alt="Black Placeholder Image"
-              class="menu-item-img"
-            />
-            <div class="menu-item-text">
-              <h3 class="menu-item-heading">
-                <span class="menu-item-name">Bruschetta</span>
-                <span class="menu-item-price">$12.90</span>
-              </h3>
-              <p class="menu-item-desc">
-                Nunc efficitur felis vel mi efficitur, sed molestie sem
-                scelerisque. Fusce orci risus, congue eu mauris nec, pretium
-                tincidunt nulla.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="menu">
-        <h2 class="menu-group-heading">Main Course</h2>
-        <div class="menu-group">
-          <div class="menu-item">
-            <img
-              src="https://dummyimage.com/600x400/ccc/fff"
-              alt="Black Placeholder Image"
-              class="menu-item-img"
-            />
-            <div class="menu-item-text">
-              <h3 class="menu-item-heading">
-                <span class="menu-item-name">Bruschetta</span>
-                <span class="menu-item-price">$12.90</span>
-              </h3>
-              <p class="menu-item-desc">
-                Nunc efficitur felis vel mi efficitur, sed molestie sem
-                scelerisque. Fusce orci risus, congue eu mauris nec, pretium
-                tincidunt nulla.
-              </p>
-            </div>
-          </div>
-          <div class="menu-item">
-            <img
-              src="https://dummyimage.com/600x400/000/fff"
-              alt="Black Placeholder Image"
-              class="menu-item-img"
-            />
-            <div class="menu-item-text">
-              <h3 class="menu-item-heading">
-                <span class="menu-item-name">Bruschetta</span>
-                <span class="menu-item-price">$12.90</span>
-              </h3>
-              <p class="menu-item-desc">
-                Nunc efficitur felis vel mi efficitur, sed molestie sem
-                scelerisque. Fusce orci risus, congue eu mauris nec, pretium
-                tincidunt nulla.
-              </p>
-            </div>
-          </div>
-          <div class="menu-item">
-            <img
-              src="https://dummyimage.com/600x400/ccc/fff"
-              alt="Black Placeholder Image"
-              class="menu-item-img"
-            />
-            <div class="menu-item-text">
-              <h3 class="menu-item-heading">
-                <span class="menu-item-name">Bruschetta</span>
-                <span class="menu-item-price">$12.90</span>
-              </h3>
-              <p class="menu-item-desc">
-                Nunc efficitur felis vel mi efficitur, sed molestie sem
-                scelerisque. Fusce orci risus, congue eu mauris nec, pretium
-                tincidunt nulla.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-    <script src="src/app.js"></script>
-  </body>
+<header>🍽️ Menu du Restaurant</header>
+
+<nav>
+  <button class="tab-button active" data-target="entrees">Entrées</button>
+  <button class="tab-button" data-target="plats">Plats</button>
+  <button class="tab-button" data-target="desserts">Desserts</button>
+</nav>
+
+<main>
+  <section id="entrees" class="active" aria-label="Entrées">
+    <h2>Entrées</h2>
+    <div class="item"><span class="item-name">Salade César</span><span class="item-price">7 €</span></div>
+    <div class="item"><span class="item-name">Soupe du jour</span><span class="item-price">5 €</span></div>
+    <div class="item"><span class="item-name">Bruschetta tomate</span><span class="item-price">6 €</span></div>
+  </section>
+
+  <section id="plats" aria-label="Plats principaux">
+    <h2>Plats principaux</h2>
+    <div class="item"><span class="item-name">Poulet rôti</span><span class="item-price">12 €</span></div>
+    <div class="item"><span class="item-name">Lasagnes végétariennes</span><span class="item-price">11 €</span></div>
+    <div class="item"><span class="item-name">Steak frites</span><span class="item-price">14 €</span></div>
+  </section>
+
+  <section id="desserts" aria-label="Desserts">
+    <h2>Desserts</h2>
+    <div class="item"><span class="item-name">Tarte au citron</span><span class="item-price">5 €</span></div>
+    <div class="item"><span class="item-name">Mousse au chocolat</span><span class="item-price">6 €</span></div>
+    <div class="item"><span class="item-name">Crème brûlée</span><span class="item-price">6 €</span></div>
+  </section>
+</main>
+
+<script>
+  const buttons = document.querySelectorAll('nav .tab-button');
+  const sections = document.querySelectorAll('main section');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class on buttons and sections
+      buttons.forEach(b => b.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      
+      // Add active on clicked button
+      btn.classList.add('active');
+
+      // Show corresponding section
+      const targetId = btn.getAttribute('data-target');
+      document.getElementById(targetId).classList.add('active');
+    });
+  });
+</script>
+
+</body>
 </html>
