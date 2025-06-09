@@ -614,4 +614,10 @@ window.addEventListener("resize", (e) => {
 setIndicator(sl);
 populateItems(starters);
 
+window.addEventListener("load", () => {
+  setIndicator(0); // pour mettre l'indicateur sur "Les Entrées"
+  populateItems(Entree);
+});
+
+
 </script>
