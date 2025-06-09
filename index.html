@@ -406,7 +406,7 @@ a:visited {
 const starters = JSON.parse(
 	"[" +
 		'{ "type":"separator", "description":"APPETIZERS" },' +
-		'{ "type":"food", "name":"CROSTINI", "description":"with diced tomatoes, onions, garlic and basil", "price":"12.00" },' +
+		'{ "type":"food", "name":"CROSTINI", "description":"with diced tomatoes, onions, garlic and basil", "price":"12.00", "image":"https://via.placeholder.com/100" },' +
 		'{ "type":"food", "name":"NACHOS", "description":"with 2 dips of your choice, gratinated with cheese and sliced chicken", "price":"10.50" },' +
 		'{ "type":"separator", "description":"SALADS" },' +
 		'{ "type":"food", "name":"CHICKEN CHILI SALAD", "description":"mixed salad, fried sliced chicken marinated with honey and chili", "price":"25.00" },' +
@@ -507,24 +507,34 @@ function populateItems(items) {
 			menu.appendChild(menuitem);
 		}
 		if (items[i].type === "food") {
-			let menuitem = document.createElement("div");
-			let menuitemname = document.createElement("div");
-			let menuitemdesc = document.createElement("div");
-			let menuitemprize = document.createElement("div");
-			menuitem.setAttribute("class", "menu-item");
-			menuitemname.setAttribute("class", "menu-item-name");
-			menuitemdesc.setAttribute("class", "menu-item-description");
-			menuitemprize.setAttribute("class", "menu-item-price");
+  let menuitem = document.createElement("div");
+  let menuitemimage = document.createElement("img");
+  let menuitemname = document.createElement("div");
+  let menuitemdesc = document.createElement("div");
+  let menuitemprize = document.createElement("div");
 
-			menuitemname.innerHTML = items[i].name;
-			menuitemdesc.innerHTML = items[i].description;
-			menuitemprize.innerHTML = items[i].price;
+  menuitem.setAttribute("class", "menu-item");
+  menuitemimage.setAttribute("class", "menu-item-image");
+  menuitemname.setAttribute("class", "menu-item-name");
+  menuitemdesc.setAttribute("class", "menu-item-description");
+  menuitemprize.setAttribute("class", "menu-item-price");
 
-			menuitem.appendChild(menuitemname);
-			menuitem.appendChild(menuitemdesc);
-			menuitem.appendChild(menuitemprize);
-			menu.appendChild(menuitem);
-		}
+  // Ajoute l’image (si présente)
+  menuitemimage.src = items[i].image || "https://via.placeholder.com/100";
+  menuitemimage.alt = items[i].name;
+
+  menuitemname.innerHTML = items[i].name;
+  menuitemdesc.innerHTML = items[i].description;
+  menuitemprize.innerHTML = items[i].price;
+
+  // Ajout dans le menu
+  menuitem.appendChild(menuitemimage);
+  menuitem.appendChild(menuitemname);
+  menuitem.appendChild(menuitemdesc);
+  menuitem.appendChild(menuitemprize);
+  menu.appendChild(menuitem);
+}
+
 		if (items[i].type === "drink") {
 			let drinkitem = document.createElement("div");
 			let drinkitemname = document.createElement("div");
