@@ -525,23 +525,24 @@ drinksbutton.addEventListener("click", (e) => {
 function populateItems(items) {
 	let menu = document.querySelector(".menu");
 	menu.innerHTML = "";
-	for (i = 0; i < items.length; i++) {
+	for (let i = 0; i < items.length; i++) {
 		if (items[i].type === "separator") {
 			let menuitem = document.createElement("div");
 			menuitem.setAttribute("class", "menu-separator");
 			menuitem.innerHTML = items[i].description;
 			menu.appendChild(menuitem);
 		}
-	if (item.type === "food") {
-  menu.innerHTML += `
-    <div class="menu-item">
-      <div class="menu-item-name">${item.name}</div>
-      <div class="menu-item-description">${item.description}</div>
-      <div class="menu-item-price">${item.price}</div>
-      ${item.image ? `<img class="menu-item-image" src="${item.image}" alt="${item.name}">` : ""}
-    </div>
-  `;
-}
+
+		if (items[i].type === "food") {
+			menu.innerHTML += `
+				<div class="menu-item">
+					<div class="menu-item-name">${items[i].name}</div>
+					<div class="menu-item-description">${items[i].description}</div>
+					<div class="menu-item-price">${items[i].price}</div>
+					${items[i].image ? `<img class="menu-item-image" src="${items[i].image}" alt="${items[i].name}">` : ""}
+				</div>
+			`;
+		}
 
 		if (items[i].type === "drink") {
 			let drinkitem = document.createElement("div");
@@ -560,10 +561,12 @@ function populateItems(items) {
 			drinkitem.appendChild(drinkitemname);
 			drinkitem.appendChild(drinkitemdesc);
 			drinkitem.appendChild(drinkitemprize);
+
 			menu.appendChild(drinkitem);
 		}
 	}
 }
+
 function setIndicator(sel) {
 	sl = sel;
 	let vp = "";
