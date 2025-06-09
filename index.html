@@ -400,32 +400,35 @@ a:visited {
 		</div>
 	</div>
 	<div class="navi">
-		<div class="navi-item1">
-			<button class="nav-button" id="startersbutton">
-				<div class="navi-icon"><i class="fas fa-seedling"></i></div>
-				<div class="navi-text">Les Entrées</div>
-			</button>
-		</div>
-	
-		<div class="navi-item2">
-			<button class="nav-button" id="mainsbutton">
-				<div class="navi-icon"><i class="fas fa-pizza-slice"></i></div>
-				<div class="navi-text">Mains</div>
-			</button>
-		</div>
-			<div class="navi-item3">
-			<button class="nav-button" id="dessertsbutton">
-				<div class="navi-icon"><i class="fas fa-ice-cream"></i></div>
-				<div class="navi-text">Desserts</div>
-			</button>
-		</div>
-		<div class="navi-item4">
-			<button class="nav-button" id="drinksbutton">
-				<div class="navi-icon"><i class="fas fa-wine-glass-alt"></i></div>
-				<div class="navi-text">Boisons</div>
-			</button>
-		</div>
-	</div>
+  <div class="navi-item1">
+    <button class="nav-button" id="startersbutton">
+      <div class="navi-icon"><i class="fas fa-seedling"></i></div>
+      <div class="navi-text">Les Entrées</div>
+    </button>
+  </div>
+
+  <div class="navi-item2">
+    <button class="nav-button" id="dessertsbutton">
+      <div class="navi-icon"><i class="fas fa-ice-cream"></i></div>
+      <div class="navi-text">Desserts</div>
+    </button>
+  </div>
+
+  <div class="navi-item3">
+    <button class="nav-button" id="mainsbutton">
+      <div class="navi-icon"><i class="fas fa-pizza-slice"></i></div>
+      <div class="navi-text">Plats</div>
+    </button>
+  </div>
+
+  <div class="navi-item4">
+    <button class="nav-button" id="drinksbutton">
+      <div class="navi-icon"><i class="fas fa-wine-glass-alt"></i></div>
+      <div class="navi-text">Boissons</div>
+    </button>
+  </div>
+</div>
+
 	<div class="menu">
 		<div class="menu-separator">Separator</div>
 		<div class="menu-item">
@@ -521,17 +524,19 @@ let ni4 = document.getElementById("ni4");
 
 startersbutton.addEventListener("click", (e) => {
 	setIndicator(0);
-	populateItems(Entree); // ou Entrees
+	populateItems(Entree);
+});
+
+dessertsbutton.addEventListener("click", (e) => {
+	setIndicator(1);
+	populateItems(desserts);
 });
 
 mainsbutton.addEventListener("click", (e) => {
-	setIndicator(1);
+	setIndicator(2);
 	populateItems(mains);
 });
-dessertsbutton.addEventListener("click", (e) => {
-	setIndicator(2);
-	populateItems(desserts);
-});
+
 drinksbutton.addEventListener("click", (e) => {
 	setIndicator(3);
 	populateItems(drinks);
@@ -596,16 +601,15 @@ function setIndicator(sel) {
 		vp = "85%";
 	}
 	let elems = [ni1, ni2, ni3, ni4];
-	for (i = 0; i < elems.length; i++) {
+	elems.forEach((el, i) => {
 		if (i === sel) {
-			elems[i].style.width = vp;
-			elems[i].style.boxShadow = "2px 2px 10px 2px var(--icolor" + (i + 1) + ")";
+			el.firstElementChild.style.width = vp;
 		} else {
-			elems[i].style.width = "0";
-			elems[i].style.boxShadow = "none";
+			el.firstElementChild.style.width = "0";
 		}
-	}
+	});
 }
+
 
 window.addEventListener("resize", (e) => {
 	setIndicator(sl);
