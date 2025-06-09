@@ -366,6 +366,15 @@ a:link,
 a:visited {
 	color: var(--maincolor);
 }
+.menu-item-image {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
+}
 
   </style>
 </head>
@@ -416,7 +425,14 @@ a:visited {
 const starters = JSON.parse(
 	"[" +
 		'{ "type":"separator", "description":"APPETIZERS" },' +
-		'{ "type":"food", "name":"CROSTINI", "description":"with diced tomatoes, onions, garlic and basil", "price":"12.00" },' +
+		'{ 
+  "type":"food", 
+  "name":"MARGHERITA", 
+  "description":"Tomato sauce, mozzarella, organic oregano", 
+  "price":"18.00",
+  "image": "https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg?ga=GA1.1.2128109423.1749430756&w=740"
+}
+,' +
 		'{ "type":"food", "name":"NACHOS", "description":"with 2 dips of your choice, gratinated with cheese and sliced chicken", "price":"10.50" },' +
 		'{ "type":"separator", "description":"SALADS" },' +
 		'{ "type":"food", "name":"CHICKEN CHILI SALAD", "description":"mixed salad, fried sliced chicken marinated with honey and chili", "price":"25.00" },' +
@@ -516,25 +532,17 @@ function populateItems(items) {
 			menuitem.innerHTML = items[i].description;
 			menu.appendChild(menuitem);
 		}
-		if (items[i].type === "food") {
-			let menuitem = document.createElement("div");
-			let menuitemname = document.createElement("div");
-			let menuitemdesc = document.createElement("div");
-			let menuitemprize = document.createElement("div");
-			menuitem.setAttribute("class", "menu-item");
-			menuitemname.setAttribute("class", "menu-item-name");
-			menuitemdesc.setAttribute("class", "menu-item-description");
-			menuitemprize.setAttribute("class", "menu-item-price");
+	if (item.type === "food") {
+  menu.innerHTML += `
+    <div class="menu-item">
+      <div class="menu-item-name">${item.name}</div>
+      <div class="menu-item-description">${item.description}</div>
+      <div class="menu-item-price">${item.price}</div>
+      ${item.image ? `<img class="menu-item-image" src="${item.image}" alt="${item.name}">` : ""}
+    </div>
+  `;
+}
 
-			menuitemname.innerHTML = items[i].name;
-			menuitemdesc.innerHTML = items[i].description;
-			menuitemprize.innerHTML = items[i].price;
-
-			menuitem.appendChild(menuitemname);
-			menuitem.appendChild(menuitemdesc);
-			menuitem.appendChild(menuitemprize);
-			menu.appendChild(menuitem);
-		}
 		if (items[i].type === "drink") {
 			let drinkitem = document.createElement("div");
 			let drinkitemname = document.createElement("div");
