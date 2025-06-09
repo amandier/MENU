@@ -444,7 +444,7 @@ a:visited {
   //////////////////////
 //Restaurant Menu
 //////////////////////
-const starters = [
+const Entree = [
   { type: "separator", description: "APPETIZERS" },
   { type: "food", name: "CROSTINI", description: "with diced tomatoes, onions, garlic and basil", price: "12.00" },
   { type: "food", name: "NACHOS", description: "with 2 dips of your choice, gratinated with cheese and sliced chicken", price: "10.50" },
@@ -520,8 +520,9 @@ let ni4 = document.getElementById("ni4");
 
 startersbutton.addEventListener("click", (e) => {
 	setIndicator(0);
-	populateItems(starters);
+	populateItems(Entree); // ou Entrees
 });
+
 mainsbutton.addEventListener("click", (e) => {
 	setIndicator(1);
 	populateItems(mains);
