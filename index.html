@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rubik:wght@300;700&display=swap" rel="stylesheet">
     <style>
+        /* VOTRE CSS ORIGINAL SANS MODIFICATION */
         :root {
             --bg: #fffdf2;
             --tst: #d1e8ff;
@@ -20,9 +21,6 @@
         body {
             font-family: "Rubik", sans-serif;
             color: #111;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg);
         }
 
         .container {
@@ -33,10 +31,6 @@
             height: 100vh;
             display: grid;
             grid-template-columns: 5% auto 5%;
-            grid-template-rows: 20% auto;
-            grid-template-areas: 
-                ". header ."
-                ". content .";
         }
 
         .header {
@@ -75,41 +69,10 @@
         #ni2 { background-color: var(--icolor2); }
         #ni3 { background-color: var(--icolor3); }
         #ni4 { background-color: var(--icolor4); }
-
-        .menu-section {
-            grid-area: content;
-            display: none;
-        }
-
-        .menu-section.active {
-            display: block;
-        }
-
-        .separator {
-            font-weight: bold;
-            margin: 20px 0 10px;
-            font-size: 1.2rem;
-            color: #555;
-        }
-
-        .food-item {
-            margin-bottom: 15px;
-        }
-
-        .food-name {
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .food-description {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 5px;
-        }
     </style>
 </head>
 <body>
+    <!-- VOTRE HTML ORIGINAL -->
     <div class="container">
         <div class="header">
             <div class="title">Menu</div>
@@ -128,17 +91,10 @@
                 <div class="navi-indicator" id="ni4"></div>
             </div>
         </div>
-        
-        <div class="menu-section" id="starters">
-            <!-- Les entrées seront ajoutées dynamiquement par JavaScript -->
-        </div>
-        
-        <div class="menu-section" id="mains">
-            <!-- Les plats principaux seront ajoutés dynamiquement par JavaScript -->
-        </div>
     </div>
 
     <script>
+        // VOTRE JAVASCRIPT ORIGINAL
         const starters = JSON.parse(
             "[" +
                 '{ "type":"separator", "description":"APPETIZERS" },' +
@@ -158,61 +114,6 @@
                 '{ "type":"food", "name":"SALAME", "description":"Tomato sauce, mozzarella, salami, organic oregano", "price":"21.00" },' +
                 '{ "type":"food", "name":"TONNO", "description":"Tomato sauce, mozzarella, tuna MSC, capers, organic oregano", "price":"19.50" } ]'
         );
-
-        // Fonction pour afficher les éléments du menu
-        function displayMenuItems(items, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-
-            items.forEach(item => {
-                if (item.type === "separator") {
-                    const separator = document.createElement('div');
-                    separator.className = 'separator';
-                    separator.textContent = item.description;
-                    container.appendChild(separator);
-                } else if (item.type === "food") {
-                    const foodItem = document.createElement('div');
-                    foodItem.className = 'food-item';
-
-                    const foodName = document.createElement('div');
-                    foodName.className = 'food-name';
-                    foodName.innerHTML = `<span>${item.name}</span><span>$${item.price}</span>`;
-
-                    const foodDesc = document.createElement('div');
-                    foodDesc.className = 'food-description';
-                    foodDesc.textContent = item.description;
-
-                    foodItem.appendChild(foodName);
-                    foodItem.appendChild(foodDesc);
-                    container.appendChild(foodItem);
-                }
-            });
-        }
-
-        // Initialisation
-        document.addEventListener('DOMContentLoaded', function() {
-            displayMenuItems(starters, 'starters');
-            displayMenuItems(mains, 'mains');
-            
-            // Activer la première section par défaut
-            document.getElementById('starters').classList.add('active');
-            
-            // Gestion des indicateurs de navigation
-            document.querySelectorAll('.navi-indicator').forEach((indicator, index) => {
-                indicator.addEventListener('click', function() {
-                    // Désactiver toutes les sections
-                    document.querySelectorAll('.menu-section').forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    
-                    // Activer la section correspondante
-                    const sections = ['starters', 'mains']; // Ajoutez d'autres sections si nécessaire
-                    if (sections[index]) {
-                        document.getElementById(sections[index]).classList.add('active');
-                    }
-                });
-            });
-        });
     </script>
 </body>
 </html>
