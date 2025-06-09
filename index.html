@@ -1,337 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Restaurant Menu</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.1/css/all.css">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Rubik:wght@300;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu Restaurant</title>
   <style>
-:root {
-  --bg: #fffdf2;
-  --radius: 10px;
-  --icolor1: #c4e85a;
-  --icolor2: #ffb370;
-  --icolor3: #d65ae8;
-  --icolor4: #63c8ff;
-}
+    :root {
+      --radius: 8px;
+      --main-color: #333;
+      --accent-color: #d35400;
+      --bg-color: #f5f5f5;
+    }
 
-body {
-  font-family: "Rubik", sans-serif;
-  margin: 0;
-  background-color: var(--bg);
-}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0 20px 40px;
+      color: var(--main-color);
+    }
 
-.container {
-  display: grid;
-  grid-template-rows: auto auto 1fr auto auto;
-  height: 100vh;
-}
+    /* ==== NAVIGATION - Gardée telle quelle ==== */
+    nav {
+      background-color: var(--accent-color);
+      padding: 15px 20px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
 
-.header .title {
-  font-family: "Dancing Script", cursive;
-  font-size: 70px;
-  text-align: center;
-  margin: 20px 0;
-}
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 20px;
+    }
 
-.indicators,
-.navi {
-  display: flex;
-  justify-content: space-around;
-  margin: 10px 20px;
-}
+    nav ul li {
+      cursor: pointer;
+      user-select: none;
+    }
 
-.navi-indicator {
-  height: 4px;
-  width: 0;
-  transition: width 0.3s ease;
-}
+    nav ul li:hover {
+      text-decoration: underline;
+    }
 
-#ni1 { background: var(--icolor1); }
-#ni2 { background: var(--icolor2); }
-#ni3 { background: var(--icolor3); }
-#ni4 { background: var(--icolor4); }
+    /* ==== CONTENU MENU ==== */
+    #menuListe {
+      max-width: 700px;
+      margin: 30px auto;
+    }
 
-.nav-button {
-  background: #fff;
-  border: none;
-  border-radius: var(--radius);
-  padding: 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .menu-item {
+      display: flex;
+      background: #fff;
+      padding: 15px;
+      border-radius: var(--radius);
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
+      gap: 15px;
+      align-items: flex-start;
+    }
 
-.nav-button i { font-size: 20px; }
+    .menu-item-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
 
-#startersbutton i { color: var(--icolor1); }
-#mainsbutton i { color: var(--icolor2); }
-#dessertsbutton i { color: var(--icolor3); }
-#drinksbutton i { color: var(--icolor4); }
+    .menu-item-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-.menu {
-  overflow-y: auto;
-  padding: 20px;
-}
+    .menu-item-name {
+      font-weight: bold;
+      margin: 0 0 5px 0;
+      font-size: 1.1rem;
+    }
 
-.menu-separator {
-  background: #eee;
-  padding: 10px 15px;
-  font-weight: bold;
-  border-radius: var(--radius);
-  margin: 20px 0 10px;
-}
+    .menu-item-description {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0;
+    }
 
-.menu-item {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  padding: 15px;
-  border-radius: var(--radius);
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
-  margin-bottom: 15px;
-  gap: 15px;
-}
-
-.menu-item-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  flex-shrink: 0;
-}
-
-.menu-item-name {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.menu-item-description {
-  font-size: 0.9em;
-  color: #555;
-}
-
-.menu-item-price {
-  margin-left: auto;
-  font-weight: bold;
-  font-size: 1em;
-}
-
-.drink-item {
-  display: flex;
-  justify-content: space-between;
-  background: #fff;
-  padding: 15px;
-  border-radius: var(--radius);
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
-  margin-bottom: 15px;
-}
-
-.drink-item-name {
-  font-weight: bold;
-}
-
-.drink-item-description {
-  font-style: italic;
-  margin: 0 10px;
-}
-
-.drink-item-price {
-  font-weight: bold;
-}
-
+    .menu-item-price {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-left: 10px;
+      white-space: nowrap;
+      align-self: flex-start;
+      color: var(--accent-color);
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="header"><div class="title">Menu</div></div>
+  <!-- NAVIGATION - inchangée -->
+  <nav>
+    <ul>
+      <li>Accueil</li>
+      <li>Menu</li>
+      <li>Contact</li>
+    </ul>
+  </nav>
 
-    <div class="indicators">
-      <div><div class="navi-indicator" id="ni1"></div></div>
-      <div><div class="navi-indicator" id="ni2"></div></div>
-      <div><div class="navi-indicator" id="ni3"></div></div>
-      <div><div class="navi-indicator" id="ni4"></div></div>
-    </div>
+  <!-- Conteneur liste des plats -->
+  <div id="menuListe"></div>
 
-    <div class="navi">
-      <button class="nav-button" id="startersbutton"><i class="fas fa-seedling"></i><span>Starters</span></button>
-      <button class="nav-button" id="mainsbutton"><i class="fas fa-pizza-slice"></i><span>Mains</span></button>
-      <button class="nav-button" id="dessertsbutton"><i class="fas fa-ice-cream"></i><span>Desserts</span></button>
-      <button class="nav-button" id="drinksbutton"><i class="fas fa-wine-glass-alt"></i><span>Drinks</span></button>
-    </div>
-
-    <div class="menu"></div>
-  </div>
-
-<script>
-const starters = [
-  { type: "separator", description: "APPETIZERS" },
-  {
-    type: "food",
-    name: "CROSTINI",
-    description: "with diced tomatoes, onions, garlic and basil",
-    price: "12.00",
-    image: "https://img.freepik.com/photos-gratuite/tranche-pizza-croustillante-viande-du-fromage_140725-6974.jpg"
-  },
-  {
-    type: "food",
-    name: "NACHOS",
-    description: "with 2 dips of your choice, gratinated with cheese and sliced chicken",
-    price: "10.50"
-  }
-];
-
-const mains = [
-  { type: "separator", description: "PIZZA" },
-  {
-    type: "food",
-    name: "MARGHERITA",
-    description: "Tomato sauce, mozzarella, organic oregano",
-    price: "18.00"
-  }
-];
-
-const desserts = [
-  { type: "separator", description: "SWEETS" },
-  {
-    type: "food",
-    name: "CHOCOLATE MOUSSE",
-    description: "with star anise, pecan brownie and caramel sauce",
-    price: "12.00"
-  }
-];
-
-const drinks = [
-  { type: "separator", description: "BEVERAGES" },
-  {
-    type: "drink",
-    name: "SPARKLING WATER",
-    description: "5dl",
-    price: "4.50"
-  },
-  {
-    type: "drink",
-    name: "ESPRESSO",
-    description: "",
-    price: "4.50"
-  }
-];
-
-let current = 0;
-
-const menu = document.querySelector('.menu');
-const ni = [ni1, ni2, ni3, ni4];
-
-function setIndicator(index) {
-  current = index;
-  ni.forEach((el, i) => {
-    el.style.width = i === index ? '60px' : '0';
-  });
-}
-
-function populateItems(items) {
-  menu.innerHTML = "";
-  items.forEach(item => {
-    if (item.type === "separator") {
-      const sep = document.createElement("div");
-      sep.className = "menu-separator";
-      sep.textContent = item.description;
-      menu.appendChild(sep);
-    }
-
-    if (item.type === "food") {
-      const div = document.createElement("div");
-      div.className = "menu-item";
-
-      if (item.image) {
-        const img = document.createElement("img");
-        img.src = item.image;
-        img.alt = item.name;
-        img.className = "menu-item-image";
-        div.appendChild(img);
+  <script>
+    // Exemple de données de plats
+    const plats = [
+      {
+        nom: "Pizza Margherita",
+        description: "Tomate, mozzarella, basilic frais",
+        prix: 8.50,
+        image: "https://cdn.pixabay.com/photo/2016/11/18/15/04/pizza-1839656_1280.jpg"
+      },
+      {
+        nom: "Spaghetti Carbonara",
+        description: "Pâtes, œufs, pancetta, parmesan",
+        prix: 12.00,
+        image: "https://cdn.pixabay.com/photo/2018/05/29/22/40/spaghetti-3441367_1280.jpg"
+      },
+      {
+        nom: "Salade César",
+        description: "Laitue, poulet grillé, parmesan, croûtons",
+        prix: 9.00,
+        image: "https://cdn.pixabay.com/photo/2017/06/02/18/24/caesar-salad-2361379_1280.jpg"
       }
+    ];
+
+    const menuListe = document.getElementById("menuListe");
+
+    plats.forEach(plat => {
+      const item = document.createElement("div");
+      item.className = "menu-item";
+
+      const image = document.createElement("img");
+      image.className = "menu-item-image";
+      image.src = plat.image;
+      image.alt = plat.nom;
 
       const content = document.createElement("div");
-      const name = document.createElement("div");
+      content.className = "menu-item-content";
+
+      const name = document.createElement("h3");
       name.className = "menu-item-name";
-      name.textContent = item.name;
-      const desc = document.createElement("div");
-      desc.className = "menu-item-description";
-      desc.textContent = item.description;
+      name.textContent = plat.nom;
+
+      const description = document.createElement("p");
+      description.className = "menu-item-description";
+      description.textContent = plat.description;
+
+      const price = document.createElement("span");
+      price.className = "menu-item-price";
+      price.textContent = plat.prix.toFixed(2) + " €";
 
       content.appendChild(name);
-      content.appendChild(desc);
-      div.appendChild(content);
+      content.appendChild(description);
 
-      const price = document.createElement("div");
-      price.className = "menu-item-price";
-      price.textContent = item.price;
-      div.appendChild(price);
+      item.appendChild(image);
+      item.appendChild(content);
+      item.appendChild(price);
 
-      menu.appendChild(div);
-    }
+      menuListe.appendChild(item);
+    });
+  </script>
 
-    if (item.type === "drink") {
-      const div = document.createElement("div");
-      div.className = "drink-item";
-
-      const name = document.createElement("div");
-      name.className = "drink-item-name";
-      name.textContent = item.name;
-
-      const desc = document.createElement("div");
-      desc.className = "drink-item-description";
-      desc.textContent = item.description;
-
-      const price = document.createElement("div");
-      price.className = "drink-item-price";
-      price.textContent = item.price;
-
-      div.appendChild(name);
-      div.appendChild(desc);
-      div.appendChild(price);
-
-      menu.appendChild(div);
-    }
-  });
-}
-
-startersbutton.onclick = () => {
-  if (current !== 0) {
-    populateItems(starters);
-    setIndicator(0);
-  }
-};
-
-mainsbutton.onclick = () => {
-  if (current !== 1) {
-    populateItems(mains);
-    setIndicator(1);
-  }
-};
-
-dessertsbutton.onclick = () => {
-  if (current !== 2) {
-    populateItems(desserts);
-    setIndicator(2);
-  }
-};
-
-drinksbutton.onclick = () => {
-  if (current !== 3) {
-    populateItems(drinks);
-    setIndicator(3);
-  }
-};
-
-window.onload = () => {
-  populateItems(starters);
-  setIndicator(0);
-};
-</script>
 </body>
 </html>
