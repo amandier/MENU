@@ -1,106 +1,166 @@
--var legend = [{ alpha:"N", food:"Nuts"},{ alpha:"E", food:"Eggs"},{ alpha:"W", food:"Wheat"},{ alpha:"D", food:"Dairy"},{ alpha:"S", food:"Seafood"}]
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Menu Restaurant</title>
+<style>
+  /* --- CSS simplifié inspiré de ton SCSS --- */
+  body {
+    font-family: Arial, sans-serif;
+    background: #e2dccc;
+    margin: 0; padding: 1rem;
+    color: #04110f;
+  }
+  h3 {
+    background: #dec022;
+    padding: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 2rem;
+    border: 3px solid #04110f;
+  }
+  .menu-section {
+    margin-bottom: 2rem;
+  }
+  .item {
+    border-bottom: 1px solid #bbb;
+    padding: 1rem 0;
+    display: flex;
+    gap: 1rem;
+  }
+  .item img {
+    max-width: 120px;
+    object-fit: cover;
+  }
+  .item__desc {
+    flex-grow: 1;
+  }
+  .item__name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+  .item__price {
+    font-weight: 700;
+    color: #dec022;
+    margin-top: 0.3rem;
+  }
+  .allergens span {
+    display: inline-block;
+    background: #00acc1;
+    color: #e2dccc;
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.3rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
 
-- var mains = [{ name:"Red and Blue", price:"7", description:"Avocado, hot sauce, blue cheese. Spicy.", image:"toast-1.png", calories:"300", wheat:'true', dairy:'true'}, { name:"Cool, cool, cool", price:"6.5", description:"Avocado, cucumbers, scallions, various spices.", image:"toast-2.png", calories:"220", wheat:'true'}, { name:"Avocotta", price:"7.5", description:"Avocado, ricotta, eggs, lemon zest, olive oil, basil.", image:"toast-3.png", calories:"318", egg:'true', wheat:'true', dairy:'true'}, { name:"The One True Pair", price:"10.5", description:"Avocado, smoked salmon, tomatoes, capers, onions, goat cheese.", image:"toast-4.png", calories:"320", wheat:'true', dairy:'true', sea:'true'}, { name:"Fishing Trip", price:"9", description:"Avocado, anchovies, lemon juice, paprika.", image:"toast-8.png", calories:"296", wheat:'true', dairy:'true', sea:'true'}, { name:"Sweet & Spicy Like Me", price:"7.5", description:"Avocado, mangoes, lemon juice, chili powder, mint.", image:"toast-5.png", calories:"240", wheat:'true'}, { name:"Orange You Glad", price:"7", description:"Avocado, citrus fruit of the week, mint, feta cheese.", image:"toast-6.png", calories:"238", wheat:'true', dairy:'true'}, { name:"White & Green Circles", price:"6.5", description:"Avocado, radishes, baby peas, lemon juice, basil.", image:"toast-7.png", calories:"220",wheat:'true'} ]
+<h1>Menu du Restaurant</h1>
 
-- var sides = [{ name:"French Fries", price:"4", description:"With ketchup or mayo", calories:"425", nut:'true', egg:'true', wheat:'true', dairy:'true', sea:'true'},{ name:"Sweet Potato Fries", price:"5.5", description:"With chipotle lime dip", calories:"510", nut:'true', egg:'true', wheat:'true', dairy:'true', sea:'true'},{ name:"Hummus & Tortilla Chips", price:"5.5", calories:"333"}]
+<div id="menu"></div>
 
-- var tarts = [{ name:"Matcha Mint", price:"6.5", description:"Item here item here item here", image:"tart-1.png", calories:"215"},{ name:"Chocoberry", price:"6", description:"Item here item here item here", image:"tart-2.png", calories:"380"},{ name:"Lemon Meringue", price:"6", description:"Item here item here item here", image:"tart-3.png", calories:"299"},{ name:"Plain Cheese Tart", price:"5", description:"Item here item here item here", image:"tart-4.png", calories:"289"},]
+<script>
+  // Données (copiées depuis ce que tu as donné)
+  const legend = [
+    { alpha:"N", food:"Nuts" },
+    { alpha:"E", food:"Eggs" },
+    { alpha:"W", food:"Wheat" },
+    { alpha:"D", food:"Dairy" },
+    { alpha:"S", food:"Seafood" }
+  ];
 
+  const mains = [
+    { name:"Red and Blue", price:"7", description:"Avocado, hot sauce, blue cheese. Spicy.", image:"toast-1.png", calories:"300", wheat:true, dairy:true },
+    { name:"Cool, cool, cool", price:"6.5", description:"Avocado, cucumbers, scallions, various spices.", image:"toast-2.png", calories:"220", wheat:true },
+    { name:"Avocotta", price:"7.5", description:"Avocado, ricotta, eggs, lemon zest, olive oil, basil.", image:"toast-3.png", calories:"318", egg:true, wheat:true, dairy:true },
+    { name:"The One True Pair", price:"10.5", description:"Avocado, smoked salmon, tomatoes, capers, onions, goat cheese.", image:"toast-4.png", calories:"320", wheat:true, dairy:true, sea:true },
+    { name:"Fishing Trip", price:"9", description:"Avocado, anchovies, lemon juice, paprika.", image:"toast-8.png", calories:"296", wheat:true, dairy:true, sea:true },
+    { name:"Sweet & Spicy Like Me", price:"7.5", description:"Avocado, mangoes, lemon juice, chili powder, mint.", image:"toast-5.png", calories:"240", wheat:true },
+    { name:"Orange You Glad", price:"7", description:"Avocado, citrus fruit of the week, mint, feta cheese.", image:"toast-6.png", calories:"238", wheat:true, dairy:true },
+    { name:"White & Green Circles", price:"6.5", description:"Avocado, radishes, baby peas, lemon juice, basil.", image:"toast-7.png", calories:"220", wheat:true }
+  ];
 
+  // Fonction pour afficher une section de menu
+  function createMenuSection(title, items) {
+    const section = document.createElement('section');
+    section.className = 'menu-section';
+    const h3 = document.createElement('h3');
+    h3.textContent = title;
+    section.appendChild(h3);
 
-- var latte = [{ name:"Chai Latte", price:"9", image:"cof-chai.png", calories:"132", nut:'true'},{ name:"Turmeric Latte", price:"9", image:"cof-turmeric.png", calories:"131", nut:'true'},{ name:"Hojicha Latte", price:"9", image:"cof-hojicha.png", calories:"140", nut:'true'},{ name:"Rose Latte", price:"9", image:"cof-rose.png", calories:"156", nut:'true'},{ name:"Red Velvet Latte", price:"9", image:"cof-redvelvet.png", calories:"450", nut:'true'},{ name:"Matcha Latte", price:"9", image:"cof-matcha.png", calories:"225", nut:'true'},{ name:"Sweet Potato Latte", price:"9", image:"cof-ubi.png", calories:"445", nut:'true'},{ name:"Charcoal Latte", price:"9", image:"cof-charcoal.png", calories:"450", nut:'true'},]
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'item';
 
+      if(item.image){
+        const img = document.createElement('img');
+        img.src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/" + item.image;
+        img.alt = item.name;
+        div.appendChild(img);
+      }
 
+      const desc = document.createElement('div');
+      desc.className = 'item__desc';
 
-header
-	.name
-		each val in ['T','O','A','S','T','Y']
-			span= val
-	.opening-hours
-		| Open Sunday to Friday 10AM - 8PM. Closed on Mondays.
-	.location
-		p 880 Toast Street, Avocado, NY 23511
-		p (233) 323 3444
-	.special-announcements
-	
-main
-	.legend
-		each val in legend
-			.legend__item
-				i= val.alpha
-				span= val.food
-		
-	.menu
-		.mains
-			h3 Avocado Toasts
-			each val in mains
-				.item
-					.item__image
-						img(src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/"+val.image)
-					.item__desc
-						.item__name= val.name
-						.item__description= val.description
-						.item__price= '$' + val.price
-						.item__calories= val.calories
-							|  calories
-						.item__allergens
-							if val.nut
-								span.allergen.nuts N
-							if val.egg
-								span.allergen.eggs E
-							if val.wheat
-								span.allergen.wheat W
-							if val.dairy
-								span.allergen.dairy D
-							if val.sea
-								span.allergen.sea S
+      const name = document.createElement('div');
+      name.className = 'item__name';
+      name.textContent = item.name;
+      desc.appendChild(name);
 
-		.sides
-			h3 Sides
-			each val in sides
-				.item
-					.item__desc
-						.item__name= val.name
-						if val.description
-							.item__description= val.description
-						.item__price= '$' + val.price
-						.item__calories= val.calories
-							|  calories
+      if(item.description){
+        const descr = document.createElement('div');
+        descr.className = 'item__description';
+        descr.textContent = item.description;
+        desc.appendChild(descr);
+      }
 
-		.tarts
-			h3 Tarts
-			each val in tarts
-				.item
-					.item__image
-						img(src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/"+val.image)
-					.item__desc
-						.item__name= val.name
-						.item__price= '$' + val.price
-						.item__calories= val.calories
-							|  calories
-							
-		.latte
-			h3  Special Lattes
-			each val in latte
-				.item
-					.item__image
-						img(src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/"+val.image)
-					.item__desc
-						.item__name= val.name
-						.item__price= '$' + val.price
-						.item__calories= val.calories
-							|  calories
-		
-		a.menu-download Download the menu
-							
-							
-footer
-	p  Let's get toasty on social media!
-	a.social-item(href="https://twitter.com/meowlivia_" target="_blank")
-		i.icon-social-twitter.icons
-	a.social-item(href="https://github.com/oliviale" target="_blank")
-		i.icon-social-github.icons
-	a.social-item(href="https://dribbble.com/oliviale" target="_blank")
-		i.icon-social-dribbble.icons
+      const price = document.createElement('div');
+      price.className = 'item__price';
+      price.textContent = "$" + item.price;
+      desc.appendChild(price);
 
-	
+      if(item.calories){
+        const cal = document.createElement('div');
+        cal.className = 'item__calories';
+        cal.textContent = item.calories + " calories";
+        desc.appendChild(cal);
+      }
+
+      if(item.nut || item.egg || item.wheat || item.dairy || item.sea){
+        const allerg = document.createElement('div');
+        allerg.className = 'allergens';
+        if(item.nut) allerg.appendChild(createAllergenSpan("Nuts"));
+        if(item.egg) allerg.appendChild(createAllergenSpan("Eggs"));
+        if(item.wheat) allerg.appendChild(createAllergenSpan("Wheat"));
+        if(item.dairy) allerg.appendChild(createAllergenSpan("Dairy"));
+        if(item.sea) allerg.appendChild(createAllergenSpan("Seafood"));
+        desc.appendChild(allerg);
+      }
+
+      div.appendChild(desc);
+      section.appendChild(div);
+    });
+
+    return section;
+  }
+
+  function createAllergenSpan(text){
+    const span = document.createElement('span');
+    span.textContent = text;
+    return span;
+  }
+
+  // Affichage dans la page
+  const menuDiv = document.getElementById('menu');
+  menuDiv.appendChild(createMenuSection("Avocado Toasts", mains));
+
+  // Ici tu peux faire pareil pour sides, tarts, latte...
+
+</script>
+
+</body>
+</html>
